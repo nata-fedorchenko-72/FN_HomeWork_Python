@@ -1,8 +1,8 @@
-import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+
 
 def test_shop():
     driver = webdriver.Chrome(
@@ -21,7 +21,8 @@ def test_shop():
     button_login = driver.find_element(By.CSS_SELECTOR, "#login-button")
     button_login.click()
 
-    add_backpack = driver.find_element(By.CSS_SELECTOR, "button#add-to-cart-sauce-labs-backpack")
+    add_backpack = driver.find_element(
+        By.CSS_SELECTOR, "button#add-to-cart-sauce-labs-backpack")
     add_backpack.click()
 
     add_shirt = driver.find_element(
@@ -53,7 +54,9 @@ def test_shop():
     button_continue = driver.find_element(By.CSS_SELECTOR, "#continue")
     button_continue.click()
 
-    total = driver.find_element(By.CSS_SELECTOR, ".summary_total_label"). text
+    total = driver.find_element(
+        By.CSS_SELECTOR, ".summary_total_label"). text
     print(total)
-    assert(total) == "Total: $58.29"
-    driver.quit
+    assert (total) == "Total: $58.29"
+
+    driver.quit()
