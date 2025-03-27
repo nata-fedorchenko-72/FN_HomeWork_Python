@@ -10,17 +10,19 @@ class ProjectApi:
         my_headers = {
             'Authorization': f'Bearer {key}'
             }
-        resp = requests.get(self.url+"/projects", headers=my_headers)
+        resp = requests.get(self.url + "/projects", headers=my_headers)
         return resp
 
     def get_project(self, id, key):
         my_headers = {
             'Authorization': f'Bearer {key}'
             }
-        resp = requests.get(self.url+"/company/"+str(id), headers=my_headers)
+        resp = requests.get(
+            self.url + "/projects/" + str(id), headers=my_headers
+            )
         return resp
 
-    def creat_project(self, name, user, key):
+    def create_project(self, name, user, key):
         project = {
             "title": name,
             "users": user
@@ -42,6 +44,19 @@ class ProjectApi:
             }
         resp = requests.put(
             self.url + "/projects/" + str(new_id),
+            json=project, headers=my_headers
+            )
+        return resp
+
+    def delete_project(self, project_id, key):
+        project = {
+            "deleted": True
+            }
+        my_headers = {
+            'Authorization': f'Bearer {key}'
+            }
+        resp = requests.put(
+            self.url + f"/projects/{project_id}",
             json=project, headers=my_headers
             )
         return resp
