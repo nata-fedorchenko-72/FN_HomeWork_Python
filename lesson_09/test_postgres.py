@@ -69,8 +69,7 @@ def test_delete():
 
     result = connection.execute(text('select * from subject'))
     rows = result.fetchall()
-
-    assert rows[-1] == (15, 'Geography')
-    assert len(rows) == 15
+    subjects = [row[1] for row in rows]
+    assert 'Visual_art' not in subjects
 
     connection.close()
